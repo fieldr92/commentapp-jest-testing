@@ -17,8 +17,19 @@ it('has a text area and a button', () => {
   expect(wrapped.find('button').length).toEqual(1);
 });
 
-it('has a text area that users can type in', () => {
-  wrapped.find('textarea').simulate('change', { target: { value: 'new comment' } });
-  wrapped.update();
-  expect(wrapped.find('textarea').prop('value')).toEqual('new comment');
+describe('the text area', () => {
+  beforeEach(() => {
+    wrapped.find('textarea').simulate('change', { target: { value: 'new comment' } });
+    wrapped.update();
+  });
+
+  it('allows users to edit', () => {
+    expect(wrapped.find('textarea').prop('value')).toEqual('new comment');
+  });
+
+  it('is reset on form submission', () => {
+    wrapped.find('form').simulate('submit');
+    wrapped.update();
+    expect(wrapped.find('textarea').prop('value')).toEqual('');
+  });
 });
