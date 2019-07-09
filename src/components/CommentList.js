@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 class CommentList extends Component {
   renderComments() {
     return this.props.comments.map((comment, i) => {
-      return <li key={comment}>{comment}</li>;
+      return <li key={i}>{comment}</li>;
     });
   }
 
